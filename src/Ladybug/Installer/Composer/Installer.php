@@ -66,7 +66,7 @@ class Installer extends LibraryInstaller
      */
     protected function getTemplateRootPath()
     {
-        return $this->vendorDir . '/raulfraile/ladybug/themes';
+        return $this->vendorDir . '/raulfraile/ladybug/data/themes';
     }
 
     /**
