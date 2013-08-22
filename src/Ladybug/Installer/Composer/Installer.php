@@ -55,7 +55,7 @@ class Installer extends LibraryInstaller
      */
     protected function extractShortName(PackageInterface $package)
     {
-        return substr($package->getPrettyName(), 25);
+        return ucfirst(substr($package->getPrettyName(), 25));
     }
 
     /**
@@ -66,10 +66,7 @@ class Installer extends LibraryInstaller
      */
     protected function getTemplateRootPath()
     {
-        return ($this->composer->getPackage()->getName() === 'raulfraile/ladybug')
-            ? 'data/themes'
-            : $this->vendorDir . '/ladybug/themes'
-            ;
+        return $this->vendorDir . '/raulfraile/ladybug/themes';
     }
 
     /**
