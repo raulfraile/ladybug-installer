@@ -8,7 +8,7 @@ use Composer\Package\PackageInterface;
 class Installer extends LibraryInstaller
 {
     /**
-     * Determines the install path for templates,
+     * Determines the install path for themes,
      *
      * The installation path is determined by checking whether the package is included in another composer configuration
      * or installed as part of the normal phpDocumentor installation.
