@@ -68,7 +68,7 @@ class Installer extends LibraryInstaller
     {
         return ($this->composer->getPackage()->getName() === 'raulfraile/ladybug')
             ? 'data/themes/Ladybug/Theme'
-            : $this->vendorDir . '/raulfraile/ladybug/data/themes/Ladybug/Theme'
+            : $this->vendorDir . '/raulfraile/ladybug-themes/Ladybug/Theme'
             ;
     }
 
