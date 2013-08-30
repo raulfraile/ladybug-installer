@@ -8,10 +8,6 @@ php:
 script:
  - vendor/bin/phpunit
 
-before_script:
- - sudo apt-get -qq update > /dev/null
- - phpenv rehash > /dev/null
- - composer selfupdate --quiet
- - composer install --dev --prefer-source
- - vendor/bin/phpunit
- - composer update --dev --prefer-source
+before_install:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
