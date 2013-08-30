@@ -7,55 +7,41 @@ use Composer\Package\PackageInterface;
 
 class Installer extends LibraryInstaller
 {
+
+    const PACKAGE_TYPE_THEME = 'ladybug-theme';
+    const PACKAGE_TYPE_PLUGIN = 'ladybug-plugin';
+
     /**
-     * Determines the install path for themes,
-     *
-     * The installation path is determined by checking whether the package is included in another composer configuration
-     * or installed as part of the normal phpDocumentor installation.
-     *
-     * When the package is included as part of a different project it will be installed in the `data/templates` folder
-     * of phpDocumentor (thus `/phpdocumentor/phpdocumentor/data/templates`); if it is installed as part of
-     * phpDocumentor it will be installed in the root of the project (thus `/data/templates`).
+     * Determines the install path for ladybug themes and plugins
      *
      * @param PackageInterface $package
-     *
-     * @throws \InvalidArgumentException if the name of the package does not start with `phpdocumentor/template-`.
      *
      * @return string a path relative to the root of the composer.json that is being installed.
      */
     public function getInstallPath(PackageInterface $package)
     {
-        if ($this->extractPrefix($package) != 'raulfraile/ladybug-theme-') {
+        return $this->getRootPath($package) . '/' . $this->extractName($package);
+    }
+
+    /**
+     * Extract the theme/plugin name
+     *
+     * @param PackageInterface $package
+     *
+     * @return string
+     */
+    protected function extractName(PackageInterface $package)
+    {
+        $extraData = $package->getExtra();
+
+        if (!array_key_exists('ladybug_name', $extraData)) {
             throw new \InvalidArgumentException(
-                'Unable to install theme'
+                'Unable to install theme/plugin, ladybug addons must '
+                    .'include the name in the extra field of composer.json'
             );
         }
 
-        return $this->getTemplateRootPath() . '/' . $this->extractShortName($package);
-    }
-
-    /**
-     * Extract the first 23 characters of the package name; which is expected to be the prefix.
-     *
-     * @param PackageInterface $package
-     *
-     * @return string
-     */
-    protected function extractPrefix(PackageInterface $package)
-    {
-        return substr($package->getPrettyName(), 0, 25);
-    }
-
-    /**
-     * Extract the everything after the first 23 characters of the package name; which is expected to be the short name.
-     *
-     * @param PackageInterface $package
-     *
-     * @return string
-     */
-    protected function extractShortName(PackageInterface $package)
-    {
-        return ucfirst(substr($package->getPrettyName(), 25));
+        return $extraData['ladybug_name'];
     }
 
     /**
@@ -64,12 +50,17 @@ class Installer extends LibraryInstaller
      * @return string a path relative to the root of the composer.json that is being installed where the templates
      *     are stored.
      */
-    protected function getTemplateRootPath()
+    protected function getRootPath(PackageInterface $package)
     {
-        return ($this->composer->getPackage()->getName() === 'raulfraile/ladybug')
-            ? 'data/themes/Ladybug/Theme'
-            : $this->vendorDir . '/raulfraile/ladybug-themes/Ladybug/Theme'
-            ;
+        $rootPath = $this->vendorDir . '/raulfraile/ladybug-themes/Ladybug/';
+
+        if ($this->composer->getPackage()->getName() === 'raulfraile/ladybug') {
+            $rootPath = 'data/themes/Ladybug/';
+        }
+
+        $rootPath .= ($package->getType() === self::PACKAGE_TYPE_THEME) ? 'Theme' : 'Plugin';
+
+        return $rootPath;
     }
 
     /**
@@ -77,6 +68,9 @@ class Installer extends LibraryInstaller
      */
     public function supports($packageType)
     {
-        return (bool)('ladybug-theme' === $packageType);
+        return in_array($packageType, array(
+            self::PACKAGE_TYPE_THEME,
+            self::PACKAGE_TYPE_PLUGIN
+        ), true);
     }
 }

@@ -11,6 +11,7 @@
         "class": "\\Ladybug\\Installer\\Composer\\Installer"
     },
     "require-dev": {
-        "composer/composer": "~1.0@dev"
+        "composer/composer": "~1.0@dev",
+        "mockery/mockery": "0.8.0"
     }
 }
