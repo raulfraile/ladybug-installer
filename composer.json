@@ -2,7 +2,7 @@
     "name": "raulfraile/ladybug-installer",
     "description": "Unified installer for ladybug addons",
     "type": "composer-installer",
-    "keywords": ["ladybug", "installer", "templates", "plugins"],
+    "keywords": ["ladybug", "installer", "themes", "plugins"],
     "license": "MIT",
     "autoload": {
         "psr-0": {"Ladybug\\Installer\\Composer": ["src/"]}

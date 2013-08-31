@@ -4,17 +4,16 @@ namespace Ladybug\Installer\Composer;
 
 require __DIR__ . '/../../../../vendor/composer/composer/tests/Composer/Test/TestCase.php';
 
-use Composer\Installer\LibraryInstaller;
 use Composer\Util\Filesystem;
 use Composer\Test\TestCase;
 use Composer\Composer;
 use Composer\Config;
 use Composer\Package\RootPackage;
+use Composer\Downloader\DownloadManager;
+use Composer\Repository\InstalledRepositoryInterface;
+use Composer\IO\IOInterface;
 use \Mockery as m;
 
-/**
- * @covers Ladybug\Installer\Composer\Installer
- */
 class InstallerTest extends TestCase
 {
 
@@ -30,9 +29,13 @@ class InstallerTest extends TestCase
     /** @var string $binDir */
     protected $binDir;
 
-
+    /** @var DownloadManager $downloadManager */
     protected $downloadManager;
+
+    /** @var InstalledRepositoryInterface $repository */
     protected $repository;
+
+    /** @var IOInterface $io */
     protected $io;
 
     /** @var Filesystem $filesystem */
@@ -82,7 +85,6 @@ class InstallerTest extends TestCase
         $this->filesystem->removeDirectory($this->binDir);
     }
 
-
     public function testGetInstallPathForThemes()
     {
         $library = new Installer($this->io, $this->composer);
@@ -104,8 +106,6 @@ class InstallerTest extends TestCase
             $library->getInstallPath($package)
         );
     }
-
-
 
     public function testGetInstallPathWhenVendored()
     {
@@ -131,7 +131,6 @@ class InstallerTest extends TestCase
 
         $library->getInstallPath($package);
     }
-
 
     public function testSupports()
     {
@@ -173,7 +172,6 @@ class InstallerTest extends TestCase
 
         return $package;
     }
-
 
     protected function createComposerMock()
     {

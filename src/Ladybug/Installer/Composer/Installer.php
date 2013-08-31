@@ -24,9 +24,10 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * Extract the theme/plugin name
+     * Extract the theme/plugin name from the package extra info
      *
      * @param PackageInterface $package
+     * @throws \InvalidArgumentException
      *
      * @return string
      */
@@ -47,8 +48,9 @@ class Installer extends LibraryInstaller
     /**
      * Returns the root installation path for templates.
      *
-     * @return string a path relative to the root of the composer.json that is being installed where the templates
-     *     are stored.
+     * @param PackageInterface $package
+     *
+     * @return string a path relative to the root of the composer.json
      */
     protected function getRootPath(PackageInterface $package)
     {
