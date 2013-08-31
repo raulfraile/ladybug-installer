@@ -102,7 +102,7 @@ class InstallerTest extends TestCase
         $package = $this->createPluginPackageMock('Test');
 
         $this->assertEquals(
-            'data/themes/Ladybug/Plugin/Test',
+            'data/plugins/Ladybug/Plugin/Test',
             $library->getInstallPath($package)
         );
     }

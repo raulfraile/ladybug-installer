@@ -57,7 +57,7 @@ class Installer extends LibraryInstaller
         $rootPath = $this->vendorDir . '/raulfraile/ladybug-themes/Ladybug/';
 
         if ($this->composer->getPackage()->getName() === 'raulfraile/ladybug') {
-            $rootPath = 'data/themes/Ladybug/';
+            $rootPath = 'data/' . ($package->getType() === self::PACKAGE_TYPE_THEME ? 'themes' : 'plugins') . '/Ladybug/';
         }
 
         $rootPath .= ($package->getType() === self::PACKAGE_TYPE_THEME) ? 'Theme' : 'Plugin';
