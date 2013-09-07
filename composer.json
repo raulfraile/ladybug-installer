@@ -14,7 +14,7 @@
         "composer-plugin-api": "1.0.0"
     },    
     "require-dev": {
-        "composer/composer": "~1.0@dev",
+        "composer/composer": "1.*",
         "mockery/mockery": "0.8.0"
     },
     "minimum-stability": "alpha",
