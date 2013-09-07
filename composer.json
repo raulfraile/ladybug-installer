@@ -1,14 +1,14 @@
 {
     "name": "raulfraile/ladybug-installer",
     "description": "Unified installer for ladybug addons",
-    "type": "composer-installer",
+    "type": "composer-plugin",
     "keywords": ["ladybug", "installer", "themes", "plugins"],
     "license": "MIT",
     "autoload": {
-        "psr-0": {"Ladybug\\Installer\\Composer": ["src/"]}
+        "psr-0": {"Ladybug": ["src/"]}
     },
     "extra": {
-        "class": "\\Ladybug\\Installer\\Composer\\Installer"
+        "class": "\\Ladybug\\LadybugPlugin"
     },
     "require": {
         "composer-plugin-api": "1.0.0"
