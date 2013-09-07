@@ -5,6 +5,6 @@ php:
   - 5.4
   - 5.5
 
-before_install:
-  - composer self-update
+before_script:
+  - composer selfupdate
   - composer --dev install
