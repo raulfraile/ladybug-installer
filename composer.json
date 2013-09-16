@@ -2,7 +2,7 @@
     "name": "raulfraile/ladybug-installer",
     "description": "Unified installer for ladybug addons",
     "type": "composer-plugin",
-    "version": "1.0.0-beta1",
+    "version": "1.0.0-beta2",
     "keywords": ["ladybug", "installer", "themes", "plugins"],
     "license": "MIT",
     "autoload": {
